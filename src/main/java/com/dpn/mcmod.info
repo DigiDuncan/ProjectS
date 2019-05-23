@@ -1,0 +1,9 @@
+[{
+"modid": "projects",
+"name": "Project S",
+"description": "Possibly a working Minecraft Size changer mod!",
+"version": "0.0.0.1",
+"mcversion": "1.12.2",
+"authorList": ["Arceus3251", "DigiDuncan"],
+"credits": "I hate all of you."
+}]
