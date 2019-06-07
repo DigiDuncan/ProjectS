@@ -1,5 +1,6 @@
 package com.dpn.projects;
 
+import com.dpn.Commands.*;
 import com.dpn.Commands.MyCommandHandler;
 import com.dpn.MyForgeEventHandler;
 import net.minecraftforge.common.MinecraftForge;
@@ -29,6 +30,10 @@ public class ProjectS{
     }
     @EventHandler
     public void onServerStarting(FMLServerStartingEvent event){
-        event.registerServerCommand(new MyCommandHandler());
+        event.registerServerCommand(new heightaddCommand());
+        event.registerServerCommand(new heightmultCommand());
+        event.registerServerCommand(new setBaseSizeCommand());
+        event.registerServerCommand(new setCurrentHeightCommand());
+        event.registerServerCommand(new setmultCommand());
     }
 }

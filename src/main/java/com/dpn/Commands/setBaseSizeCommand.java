@@ -9,10 +9,10 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class MyCommandHandler extends CommandBase {
+public class setBaseSizeCommand extends CommandBase {
     @Override
     public String getUsage(ICommandSender var1){
-        return "/" + this.getName() + " Tells the player a beautiful message!";
+        return "/" + this.getName() + " <player> [size] //Set's a users basesize (what other math is based on)";
     }
     @Override
     public int getRequiredPermissionLevel(){
@@ -20,10 +20,10 @@ public class MyCommandHandler extends CommandBase {
     }
     @Override
     public String getName(){
-        return "test";
+        return "basesize";
     }
     @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException{
-        Minecraft.getMinecraft().player.sendChatMessage("Go fuck yourself");
+        Minecraft.getMinecraft().player.sendChatMessage("Placeholder Text");
     }
 }
