@@ -1,7 +1,6 @@
 package com.dpn.projects;
 
 import com.dpn.Commands.*;
-import com.dpn.Commands.MyCommandHandler;
 import com.dpn.MyForgeEventHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
