@@ -1,12 +1,6 @@
 package com.dpn;
 
-import net.minecraft.advancements.critereon.PlayerHurtEntityTrigger;
-import net.minecraft.block.BlockCactus;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
