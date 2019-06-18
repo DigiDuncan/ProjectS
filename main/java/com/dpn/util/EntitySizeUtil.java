@@ -19,11 +19,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntitySizeUtil {
 
-	public static final float HARD_MIN = 0.125F;
-	public static final float HARD_MAX = 8F;
+	public static final float HARD_MIN = 0.0625F;
+	public static final float HARD_MAX = 16F;
 
-	public static final float TINY_THRESHOLD = 0.33333F;
-	public static final float HUGE_THRESHOLD = 3F;
+	public static final float TINY_THRESHOLD = 0.0625F;
+	public static final float HUGE_THRESHOLD = 16F;
 
 	public static float getEntityScale(Entity entity) {
 		if (entity.hasCapability(SizeProvider.sizeCapability, null)) {
