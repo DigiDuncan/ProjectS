@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -32,6 +33,8 @@ public class ProjectS{
     public static CommonProxy proxy;
 
     @Mod.Instance
+    public static ProjectS instance;
+
     public static Configuration config;
 
     @EventHandler
@@ -40,15 +43,23 @@ public class ProjectS{
         PacketHandler.registerMessages();
 
         File directory = event.getModConfigurationDirectory();
-        config = new Configuration(new File(directory.getPath(), "projects.cfg"));
+        config = new Configuration(new File(directory.getPath(), "lilliputian.cfg"));
         Config.readConfig();
 
         proxy.preInit(event);
     }
     @EventHandler
     public static void init(FMLInitializationEvent event){
-        logger.info("initialize FMLServerStartingEvent :" +NAME);
-        MinecraftForge.EVENT_BUS.register(new MyForgeEventHandler());
+        proxy.init(event);
+    }
+    @EventHandler
+    public void postInit(FMLPostInitializationEvent event){
+        if (config.hasChanged()) {
+            config.save();
+        }
+        Config.postInit();
+
+        proxy.postInit(event);
     }
     @EventHandler
     public void onServerStarting(FMLServerStartingEvent event){
