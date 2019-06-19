@@ -23,5 +23,8 @@ public interface ISizeCapability {
 
 	public NBTTagCompound saveNBT();
 	public void loadNBT(NBTTagCompound compound);
+
+	public void setCameraHeight(float baseSize);
+	public float getCameraHeight();
 	
 }

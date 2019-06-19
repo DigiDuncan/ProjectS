@@ -13,6 +13,7 @@ public class DefaultSizeCapability implements ISizeCapability {
 	private float prevScale = 1F;
 	
 	private int morphTime = 0;
+	private float cameraHeight = 1F;
 	
 	public DefaultSizeCapability() {
 		
@@ -121,5 +122,10 @@ public class DefaultSizeCapability implements ISizeCapability {
 	public void loadNBT(NBTTagCompound compound) {
 		SizeCapabilityStorage.storage.readNBT(SizeProvider.sizeCapability, this, null, compound);
 	}
-
+	public void setCameraHeight(float height){
+		cameraHeight = height;
+	}
+	public float getCameraHeight(){
+		return this.cameraHeight;
+	}
 }
