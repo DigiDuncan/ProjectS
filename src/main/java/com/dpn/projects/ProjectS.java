@@ -54,7 +54,6 @@ public class ProjectS {
     @EventHandler
     public void init(FMLInitializationEvent event) {
 
-        MinecraftForge.EVENT_BUS.register(new MyForgeEventHandler());
         System.out.println("init");
 
         proxy.init(event);
