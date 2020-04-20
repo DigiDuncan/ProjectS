@@ -8,7 +8,9 @@ import com.dpn.capabilities.ISizeCapability;
 import com.dpn.capabilities.SizeCapabilityStorage;
 import com.dpn.proxy.CommonProxy;
 import com.dpn.network.PacketHandler;
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -22,7 +24,7 @@ import net.minecraftforge.common.config.Configuration;
 import java.io.File;
 
 @Mod(modid = ProjectS.MODID, name = ProjectS.NAME, version = ProjectS.VERSION)
-public class ProjectS{
+public class ProjectS {
     public static final String MODID = "projects";
     public static final String NAME = "Project S";
     public static final String VERSION = "1.0";
@@ -38,7 +40,7 @@ public class ProjectS{
     public static Configuration config;
 
     @EventHandler
-    public void preInit(FMLPreInitializationEvent event){
+    public void preInit(FMLPreInitializationEvent event) {
         CapabilityManager.INSTANCE.register(ISizeCapability.class, new SizeCapabilityStorage(), DefaultSizeCapability.class);
         PacketHandler.registerMessages();
 
@@ -48,25 +50,35 @@ public class ProjectS{
 
         proxy.preInit(event);
     }
+
     @EventHandler
-    public static void init(FMLInitializationEvent event){
+    public void init(FMLInitializationEvent event) {
+
+        MinecraftForge.EVENT_BUS.register(new MyForgeEventHandler());
+        System.out.println("init");
+
         proxy.init(event);
     }
+
     @EventHandler
-    public void postInit(FMLPostInitializationEvent event){
+    public void postInit(FMLPostInitializationEvent event) {
         if (config.hasChanged()) {
             config.save();
         }
         Config.postInit();
 
+        System.out.println("postInit");
+
         proxy.postInit(event);
     }
+
     @EventHandler
-    public void onServerStarting(FMLServerStartingEvent event){
+    public void onServerStarting(FMLServerStartingEvent event) {
         event.registerServerCommand(new heightaddCommand());
         event.registerServerCommand(new heightmultCommand());
         event.registerServerCommand(new setBaseSizeCommand());
         event.registerServerCommand(new setCurrentHeightCommand());
         event.registerServerCommand(new setmultCommand());
+        System.out.println("Server Starting");
     }
 }
