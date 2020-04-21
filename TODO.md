@@ -12,6 +12,11 @@
 ## Mobs
 - [ ] Stepping on much smaller mobs hurts them, large things stepping on you hurts you.
 
+## Blocks
+- [ ] Growing into a block breaks it.
+- [ ] Tinies can climb up dirt, grass, sand (soft things)
+- [ ] Giants jumping can create holes.
+
 ## Commands
 - [ ] Allow `setbasesize` to use cm/m/ft/in/x'y" notation.
 - [ ] Get `setmult` working.
