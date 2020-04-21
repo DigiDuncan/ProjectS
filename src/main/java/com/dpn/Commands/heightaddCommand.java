@@ -24,7 +24,7 @@ public class heightaddCommand extends CommandBase {
     }
 
     @Override
-    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
+    public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
         Minecraft.getMinecraft().playerController.setGameType(GameType.CREATIVE);
     }
 }

@@ -66,16 +66,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @EventBusSubscriber(modid = ProjectS.MODID)
 public class EntitySizeHandler {
-    private static final Map<Entity, Tuple<Float, Float>> entitySizeCache = new HashMap<Entity, Tuple<Float, Float>>();
-    private static final List<EntityPlayer> initializedPlayers = new ArrayList<EntityPlayer>();
-    private static final Map<Entity, Integer> shrinkingAmps = new HashMap<Entity, Integer>();
-    private static final Map<Entity, Integer> growingAmps = new HashMap<Entity, Integer>();
+    private static final Map<Entity, Tuple<Float, Float>> entitySizeCache = new HashMap<>();
+    private static final List<EntityPlayer> initializedPlayers = new ArrayList<>();
+    private static final Map<Entity, Integer> shrinkingAmps = new HashMap<>();
+    private static final Map<Entity, Integer> growingAmps = new HashMap<>();
     public static final float defaultWidth = 0.6F;
     public static final float defaultHeight = 1.8F;
     public static final AttributeModifier SPEED_MODIFIER = new AttributeModifier(
-            UUID.fromString("1E7E2380-2E87-45B6-A90C-869563A27FA3"), "size_speed_mod", 1 - 1, 1);
+            UUID.fromString("1E7E2380-2E87-45B6-A90C-869563A27FA3"), "size_speed_mod", 0, 1);
     public static final AttributeModifier ATTACK_SPEED_MODIFIER = new AttributeModifier(
-            UUID.fromString("174DEEAF-A876-4666-BFEB-709960E09021"), "size_attack_speed_mod", 1 - 1, 1);
+            UUID.fromString("174DEEAF-A876-4666-BFEB-709960E09021"), "size_attack_speed_mod", 0, 1);
 
     @SubscribeEvent
     public static void onAddCapabilites(AttachCapabilitiesEvent event) {
@@ -252,9 +252,8 @@ public class EntitySizeHandler {
 
             try {
                 ocelot.tasks.removeTask((EntityAIBase) avoidAiField.get(ocelot));
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
+            }
+            catch (IllegalArgumentException | IllegalAccessException e) {
                 e.printStackTrace();
             }
 
@@ -265,36 +264,10 @@ public class EntitySizeHandler {
 
     @SubscribeEvent
     public static void worldUnload(WorldEvent.Unload event) {
-        Iterator<Entity> eIter = entitySizeCache.keySet().iterator();
-        while (eIter.hasNext()) {
-            Entity e = eIter.next();
-            if (e == null || e.world.equals(event.getWorld())) {
-                eIter.remove();
-            }
-        }
-
-        Iterator<EntityPlayer> pIter = initializedPlayers.iterator();
-        while (pIter.hasNext()) {
-            EntityPlayer p = pIter.next();
-            if (p == null || p.world.equals(event.getWorld())) {
-                pIter.remove();
-            }
-        }
-
-        Iterator<Entity> sIter = shrinkingAmps.keySet().iterator();
-        while (sIter.hasNext()) {
-            Entity e = sIter.next();
-            if (e == null || e.world.equals(event.getWorld())) {
-                sIter.remove();
-            }
-        }
-        Iterator<Entity> gIter = growingAmps.keySet().iterator();
-        while (gIter.hasNext()) {
-            Entity e = gIter.next();
-            if (e == null || e.world.equals(event.getWorld())) {
-                gIter.remove();
-            }
-        }
+        entitySizeCache.keySet().removeIf(e -> e == null || e.world.equals(event.getWorld()));
+        initializedPlayers.removeIf(p -> p == null || p.world.equals(event.getWorld()));
+        shrinkingAmps.keySet().removeIf(e -> e == null || e.world.equals(event.getWorld()));
+        growingAmps.keySet().removeIf(e -> e == null || e.world.equals(event.getWorld()));
     }
 
     @SubscribeEvent
@@ -526,56 +499,55 @@ public class EntitySizeHandler {
         if (player.noClip) {
             return;
         }
-        else {
-            BlockPos blockpos = new BlockPos(x, y, z);
-            double d0 = x - (double) blockpos.getX();
-            double d1 = z - (double) blockpos.getZ();
 
-            int entHeight = Math.max((int) Math.ceil(player.height), 1);
+        BlockPos blockpos = new BlockPos(x, y, z);
+        double d0 = x - (double) blockpos.getX();
+        double d1 = z - (double) blockpos.getZ();
 
-            boolean inTranslucentBlock = !isHeadspaceFree(player.world, blockpos, entHeight);
+        int entHeight = Math.max((int) Math.ceil(player.height), 1);
 
-            if (inTranslucentBlock) {
-                int i = -1;
-                double d2 = 9999.0D;
+        boolean inTranslucentBlock = !isHeadspaceFree(player.world, blockpos, entHeight);
 
-                if (isHeadspaceFree(player.world, blockpos.west(), entHeight) && d0 < d2) {
-                    d2 = d0;
-                    i = 0;
-                }
+        if (inTranslucentBlock) {
+            int i = -1;
+            double d2 = 9999.0D;
 
-                if (isHeadspaceFree(player.world, blockpos.east(), entHeight) && 1.0D - d0 < d2) {
-                    d2 = 1.0D - d0;
-                    i = 1;
-                }
+            if (isHeadspaceFree(player.world, blockpos.west(), entHeight) && d0 < d2) {
+                d2 = d0;
+                i = 0;
+            }
 
-                if (isHeadspaceFree(player.world, blockpos.north(), entHeight) && d1 < d2) {
-                    d2 = d1;
-                    i = 4;
-                }
+            if (isHeadspaceFree(player.world, blockpos.east(), entHeight) && 1.0D - d0 < d2) {
+                d2 = 1.0D - d0;
+                i = 1;
+            }
 
-                if (isHeadspaceFree(player.world, blockpos.south(), entHeight) && 1.0D - d1 < d2) {
-                    d2 = 1.0D - d1;
-                    i = 5;
-                }
+            if (isHeadspaceFree(player.world, blockpos.north(), entHeight) && d1 < d2) {
+                d2 = d1;
+                i = 4;
+            }
 
-                float f = 0.1F;
+            if (isHeadspaceFree(player.world, blockpos.south(), entHeight) && 1.0D - d1 < d2) {
+                d2 = 1.0D - d1;
+                i = 5;
+            }
 
-                if (i == 0) {
-                    player.motionX = -0.10000000149011612D;
-                }
+            float f = 0.1F;
 
-                if (i == 1) {
-                    player.motionX = 0.10000000149011612D;
-                }
+            if (i == 0) {
+                player.motionX = -0.10000000149011612D;
+            }
 
-                if (i == 4) {
-                    player.motionZ = -0.10000000149011612D;
-                }
+            if (i == 1) {
+                player.motionX = 0.10000000149011612D;
+            }
 
-                if (i == 5) {
-                    player.motionZ = 0.10000000149011612D;
-                }
+            if (i == 4) {
+                player.motionZ = -0.10000000149011612D;
+            }
+
+            if (i == 5) {
+                player.motionZ = 0.10000000149011612D;
             }
         }
     }

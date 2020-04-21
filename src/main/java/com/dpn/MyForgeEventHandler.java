@@ -12,5 +12,6 @@ public class MyForgeEventHandler {
 
     @SubscribeEvent
     public void placedBlock() {
+
     }
 }

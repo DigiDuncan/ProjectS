@@ -17,11 +17,11 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class Config {
     private final static String CATEGORY_GENERAL = "all.general";
-    private final static List<String> PROPERTY_ORDER_GENERAL = new ArrayList<String>();
+    private final static List<String> PROPERTY_ORDER_GENERAL = new ArrayList<>();
     private static List<String> resizingBlacklistStrings;
-    public static final List<Class> RESIZING_BLACKLIST = new ArrayList<Class>();
+    public static final List<Class> RESIZING_BLACKLIST = new ArrayList<>();
     private static List<String> entityBaseSizeStrings;
-    public static final Map<Class, BaseSizeRange> ENTITY_BASESIZES = new HashMap<Class, BaseSizeRange>();
+    public static final Map<Class, BaseSizeRange> ENTITY_BASESIZES = new HashMap<>();
     public static BaseSizeRange PLAYER_BASESIZE;
 
     public static void readConfig() {
@@ -29,9 +29,11 @@ public class Config {
         try {
             cfg.load();
             initGeneralConfig(cfg);
-        } catch (Exception e1) {
+        }
+        catch (Exception e1) {
 
-        } finally {
+        }
+        finally {
             if (cfg.hasChanged()) {
                 cfg.save();
             }

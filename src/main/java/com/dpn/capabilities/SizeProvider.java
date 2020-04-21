@@ -7,7 +7,7 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 public class SizeProvider implements ICapabilitySerializable<NBTTagCompound> {
-    private ISizeCapability capabilitySize = null;
+    private ISizeCapability capabilitySize;
 
     public SizeProvider() {
         this.capabilitySize = new DefaultSizeCapability();
