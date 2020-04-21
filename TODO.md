@@ -1,9 +1,16 @@
 # ProjectS TODO
 
 ## Player
+- [X] Adjust model size.
+- [X] Adjust step height.
+- [X] Adjust fall height.
+- [X] Adjust player speed.
 - [ ] Adjust camera position to match player height.
 - [ ] Adjust collision to match.
 - [ ] Set fall damage to be accurate to scale.
+
+## Mobs
+- [ ] Stepping on much smaller mobs hurts them, large things stepping on you hurts you.
 
 ## Commands
 - [ ] Allow `setbasesize` to use cm/m/ft/in/x'y" notation.

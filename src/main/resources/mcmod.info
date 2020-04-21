@@ -1,7 +1,7 @@
 [
 {
   "modid": "projects",
-  "name": "Project S",
+  "name": "ProjectS",
   "description": "The size changing mod!",
   "version": "${version}",
   "mcversion": "${mcversion}",
