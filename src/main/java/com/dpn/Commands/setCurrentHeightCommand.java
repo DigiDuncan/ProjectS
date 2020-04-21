@@ -8,19 +8,22 @@ import net.minecraft.server.MinecraftServer;
 
 public class setCurrentHeightCommand extends CommandBase {
     @Override
-    public String getUsage(ICommandSender var1){
-        return "/" +this.getName()+" <player> [size] //Adjust the player's multiplier to make the player's current height the input size.";
+    public String getUsage(ICommandSender var1) {
+        return "/" + this.getName() + " <player> [size] //Adjust the player's multiplier to make the player's current height the input size.";
     }
+
     @Override
-    public int getRequiredPermissionLevel(){
+    public int getRequiredPermissionLevel() {
         return 0;
     }
+
     @Override
-    public String getName(){
+    public String getName() {
         return "setcurrentheight";
     }
+
     @Override
-    public void execute(MinecraftServer server, ICommandSender sender, String[] args)throws CommandException{
+    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
         Minecraft.getMinecraft().player.sendChatMessage("Placeholder Text");
     }
 }

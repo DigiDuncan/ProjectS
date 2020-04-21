@@ -1,10 +1,8 @@
 package com.dpn.capabilities;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 
 public interface ISizeCapability {
-	
 	public float getBaseSize();
 	public float getScale();
 	public void setBaseSize(float baseSize);
@@ -26,5 +24,4 @@ public interface ISizeCapability {
 
 	public void setCameraHeight(float baseSize);
 	public float getCameraHeight();
-	
 }

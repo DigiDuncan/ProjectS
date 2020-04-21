@@ -2,7 +2,6 @@ package com.dpn.Commands;
 
 import java.util.Collections;
 import java.util.List;
-
 import javax.annotation.Nullable;
 
 import com.dpn.projects.ProjectS;
@@ -20,7 +19,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 
 public class setBaseSizeCommand extends CommandBase {
-
     @Override
     public String getName() {
         return "setbasesize";
@@ -41,7 +39,8 @@ public class setBaseSizeCommand extends CommandBase {
         if (args.length < 1 || args.length > 2) {
             throw new WrongUsageException(getUsage(sender), new Object[0]);
             //Make sure this is used correctly. If not it will show how
-        } else {
+        }
+        else {
             int i = 0;
             Entity entity;
             //Defines Entity
@@ -49,7 +48,8 @@ public class setBaseSizeCommand extends CommandBase {
             if (args.length == 1) {
                 entity = getCommandSenderAsPlayer(sender);
                 //Defines who sent the command and who to target
-            } else {
+            }
+            else {
                 entity = getEntity(server, sender, args[i]);
                 //Defines who sent the command and who to target
                 i = 1;
@@ -73,7 +73,8 @@ public class setBaseSizeCommand extends CommandBase {
                     PacketHandler.INSTANCE.sendToAll(new MessageSizeChange(cap.getBaseSize(), cap.getScale(), entity.getEntityId()));
                     //SHOULD say "Hey, this moron changed size" Only on servers
                 }
-            } else {
+            }
+            else {
                 // notifyCommandListener(sender, this, Elastic.MODID + ".commands.setbasesize.failure.capability");
             }
         }
