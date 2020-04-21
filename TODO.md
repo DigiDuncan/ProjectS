@@ -15,6 +15,7 @@
 ## Blocks
 - [ ] Growing into a block breaks it.
 - [ ] Tinies can climb up dirt, grass, sand (soft things)
+- [ ] Tinies float whilst holding Lily Pads/Paper
 - [ ] Giants jumping can create holes.
 
 ## Commands
